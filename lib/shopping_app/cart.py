@@ -1,11 +1,12 @@
 from ownable import Ownable
 
-class Cart:
+class Cart(Ownable):
     from item_manager import show_items
 
     def __init__(self, owner):
-        self.set_owner(owner)
-        self.items = []
+        super().__init__()  # Llama al constructor de Ownable
+        self.set_owner(owner)  # Asigna el propietario al carrito
+        self.items = []  # Inicializa la lista de artículos en el carrito
 
     def items_list(self):
         return self.items
@@ -21,17 +22,15 @@ class Cart:
 
     def check_out(self):
         if self.owner.wallet.balance < self.total_amount():
-            pass  # Eliminar el pass al codificar el método check_out.
+            print("Saldo insuficiente en la billetera del propietario del carrito.")
+            return
         
-        # Requisitos:
-        #   - El precio de compra de todos los artículos en el carrito (Cart#items) se transfiere 
-        #     de la billetera del propietario del carrito a la billetera del propietario del artículo.
-        #   - La propiedad de todos los artículos en el carrito (Cart#items) se transfiere al propietario del carrito.
-        #   - El contenido del carrito (Cart#items) debe vaciarse.
+        for item in self.items:
+            item.owner.wallet.deposit(item.price)  # Transfiere el precio del artículo a la billetera del propietario del artículo
+            item.owner = self.owner  # Transfiere la propiedad del artículo al propietario del carrito
         
-        # Pistas:
-        #   - La billetera del propietario del carrito ==> self.owner.wallet
-        #   - La billetera del propietario del artículo ==> item.owner.wallet
-        #   - Transferencia de dinero ==> retirar de la billetera del propietario del carrito y 
-        #     depositar en la billetera del propietario del artículo.
-        #   - Transferencia de propiedad del artículo al propietario del carrito ==> cambiar item.owner = self.owner
+        self.items = []  # Vacía el carrito después de la compra
+
+        print("Compra realizada exitosamente.")
+
+    # Resto del código de la clase Cart...

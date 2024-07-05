@@ -6,15 +6,17 @@ class Item:
     def __init__(self, name, price, owner=None):
         self.name = name
         self.price = price
-        self.set_owner(owner)
-        # Cuando se crea una instancia de Item, dicha instancia (self) se almacena en la variable de clase instances.
+        self.set_owner(owner)  # Llama al método set_owner si existe
         Item.instances.append(self)
 
     def label(self):
         return {"name": self.name, "price": self.price}
 
+    def set_owner(self, owner):
+        # Implementa la lógica para establecer el propietario (owner) del ítem
+        # Por ejemplo, puedes asignar el valor directamente o realizar otras acciones necesarias.
+        self.owner = owner
+
     @staticmethod
     def item_all():
-        # Devuelve instances ==> Item.item_all() devuelve todas las instancias de Item creadas hasta el momento.
         return Item.instances
-
