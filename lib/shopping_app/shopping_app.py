@@ -2,62 +2,62 @@ from customer import Customer
 from item import Item
 from seller import Seller
 
-seller = Seller("DICストア")
+vendedor = Seller("DIC Store")
 for i in range(10):
-    Item("CPU", 40830, seller)
-    Item("メモリー", 13880, seller)
-    Item("マザーボード", 28980, seller)
-    Item("電源ユニット", 8980, seller)
-    Item("PCケース", 8727, seller)
-    Item("3.5インチHDD", 10980, seller)
-    Item("2.5インチSSD", 13370, seller)
-    Item("M.2 SSD", 12980, seller)
-    Item("CPUクーラー", 13400, seller)
-    Item("グラフィックボード", 23800, seller)
+    Item("CPU", 40830, vendedor)
+    Item("Memoria", 13880, vendedor)
+    Item("Placa base", 28980, vendedor)
+    Item("Fuente de alimentación", 8980, vendedor)
+    Item("Caja para PC", 8727, vendedor)
+    Item("HDD de 3.5 pulgadas", 10980, vendedor)
+    Item("SSD de 2.5 pulgadas", 13370, vendedor)
+    Item("SSD M.2", 12980, vendedor)
+    Item("Refrigerador de CPU", 13400, vendedor)
+    Item("Tarjeta gráfica", 23800, vendedor)
 
-print("🤖 あなたの名前を教えてください")
-customer = Customer(input())
+print("🤖 Por favor, dime tu nombre")
+cliente = Customer(input())
 
-print("🏧 ウォレットにチャージする金額を入力にしてください")
-customer.wallet.deposit(int(input()))
+print("🏧 Por favor, ingresa la cantidad a cargar en la billetera")
+cliente.wallet.deposit(int(input()))
 
-print("🛍️ ショッピングを開始します")
-end_shopping = False
-while not end_shopping:
-    print("📜 商品リスト")
-    seller.show_items()
+print("🛍️ Comenzando las compras")
+fin_compras = False
+while not fin_compras:
+    print("📜 Lista de productos")
+    vendedor.show_items()
 
-    print("️️⛏ 商品番号を入力してください")
-    number = int(input())
+    print("⛏ Por favor, ingresa el número del producto")
+    numero = int(input())
 
-    print("⛏ 商品数量を入力してください")
-    quantity = int(input())
+    print("⛏ Por favor, ingresa la cantidad del producto")
+    cantidad = int(input())
 
-    items = seller.pick_items(number, quantity)
+    items = vendedor.pick_items(numero, cantidad)
     for item in items:
-        customer.cart.add(item)
-    print("🛒 カートの中身")
-    customer.cart.show_items()
-    print(f"🤑 合計金額: {customer.cart.total_amount()}")
+        cliente.cart.add(item)
+    print("🛒 Contenido del carrito")
+    cliente.cart.show_items()
+    print(f"🤑 Importe total: {cliente.cart.total_amount()}")
 
-    print("😭 買い物を終了しますか？(yes/no)")
-    end_shopping = input() == "yes"
+    print("😭 ¿Quieres finalizar las compras? (sí/no)")
+    fin_compras = input() == "sí"
 
-print("💸 購入を確定しますか？(yes/no)")
-if input() == "yes":
-    customer.cart.check_out()
+print("💸 ¿Quieres confirmar la compra? (sí/no)")
+if input() == "sí":
+    cliente.cart.check_out()
 
-print("୨୧┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈結果┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈୨୧")
-print(f"️🛍️ ️{customer.name}の所有物")
-customer.show_items()
-print(f"😱👛 {customer.name}のウォレット残高: {customer.wallet.balance}")
+print("୨୧┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈Resultado┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈୨୧")
+print(f"🛍️ Posesiones de {cliente.name}")
+cliente.show_items()
+print(f"😱👛 Saldo de la billetera de {cliente.name}: {cliente.wallet.balance}")
 
-print(f"📦 {seller.name}の在庫状況")
-seller.show_items()
-print(f"😻👛 {seller.name}のウォレット残高: {seller.wallet.balance}")
+print(f"📦 Estado del inventario de {vendedor.name}")
+vendedor.show_items()
+print(f"😻👛 Saldo de la billetera de {vendedor.name}: {vendedor.wallet.balance}")
 
-print("🛒 カートの中身")
-customer.cart.show_items()
-print(f"🌚 合計金額: {customer.cart.total_amount()}")
+print("🛒 Contenido del carrito")
+cliente.cart.show_items()
+print(f"🌚 Importe total: {cliente.cart.total_amount()}")
 
-print("🎉 終了")
+print("🎉 Fin")

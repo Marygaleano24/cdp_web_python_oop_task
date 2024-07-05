@@ -1,3 +1,5 @@
+from ownable import Ownable
+
 class Cart:
     from item_manager import show_items
 
@@ -19,13 +21,17 @@ class Cart:
 
     def check_out(self):
         if self.owner.wallet.balance < self.total_amount():
-            pass    # check_outメソッドをコーディングする際はpassは削除してください。
-        # 要件
-        #   - カートの中身（Cart#items）のすべてのアイテムの購入金額が、カートのオーナーのウォレットからアイテムのオーナーのウォレットに移されること。
-        #   - カートの中身（Cart#items）のすべてのアイテムのオーナー権限が、カートのオーナーに移されること。
-        #   - カートの中身（Cart#items）が空になること。
-        # ヒント
-        #   - カートのオーナーのウォレット ==> self.owner.wallet
-        #   - アイテムのオーナーのウォレット ==> item.owner.wallet
-        #   - お金が移されるということ ==> (？)のウォレットからその分を引き出して、(？)のウォレットにその分を入金するということ
-        #   - アイテムのオーナー権限がカートのオーナーに移されること ==> オーナーの書き換え（item.owner = ?）
+            pass  # Eliminar el pass al codificar el método check_out.
+        
+        # Requisitos:
+        #   - El precio de compra de todos los artículos en el carrito (Cart#items) se transfiere 
+        #     de la billetera del propietario del carrito a la billetera del propietario del artículo.
+        #   - La propiedad de todos los artículos en el carrito (Cart#items) se transfiere al propietario del carrito.
+        #   - El contenido del carrito (Cart#items) debe vaciarse.
+        
+        # Pistas:
+        #   - La billetera del propietario del carrito ==> self.owner.wallet
+        #   - La billetera del propietario del artículo ==> item.owner.wallet
+        #   - Transferencia de dinero ==> retirar de la billetera del propietario del carrito y 
+        #     depositar en la billetera del propietario del artículo.
+        #   - Transferencia de propiedad del artículo al propietario del carrito ==> cambiar item.owner = self.owner

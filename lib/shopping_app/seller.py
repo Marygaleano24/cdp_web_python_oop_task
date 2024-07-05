@@ -1,3 +1,4 @@
+from ownable import Ownable
 from user import User
 
 class Seller(User):
